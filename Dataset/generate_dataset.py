@@ -24,7 +24,7 @@ for i in range(1000):
 
         writer.writerow({
             'seal_name': random_seal[0],
-            'bucket_list': list(random_seal[1]),
+            'bucket_list': random_seal[1],
             'number': random_seal[2]
         })
 
