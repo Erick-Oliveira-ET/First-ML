@@ -19,13 +19,13 @@ This project is the complementation of an another project that I intend to make 
 ## Preparing the dataset
   At first I thought it would be better if the ML randonly picked a hand seal in a file for an indefinitely time. But after reading the Tensorflow documentation, it would be better if I had a file with the dataset defined as it uses less processing and I can reuse the same data or increase if I need.
   
-  First I need to select the position of each finger in the array: starts at the thumb of the right hand as 0 and increase until the pinky of the left hand as 9. 
+  First I need to select the position of each finger in the array: starts at the thumb of the right hand as 0 and increase until the pinky of the left hand as 9. However, after making some tests, I change the dataset architecture and made each finger one column.
   
   ![hand-seal](/Dataset/Hand_Enumaration.png?raw=true)
   
-  Because of the limitations of this method, some hand seals are the same when buckerized because the fingers are up or down but the hand is in a different position. It's valid enphasize that there's no middle term, it's just up or down, 1 or 0. I could use the [bucketized_column](https://www.tensorflow.org/api_docs/python/tf/feature_column/bucketized_column) method of TensorFlow and make each seal be a random selection of 0s and 1s in a list but I want to make my dataset by hand and know wich image is wich list. Anyways. Because of the limitations I select 10 [specifics seals](Dataset/img/) and made a [cvs file](Dataset/data_set.csv) with the seal_name,bucket_list and number (number is the corresponding output as bucket_list is the input).
+  Because of the limitations of this method, some hand seals are the same when buckerized because the fingers are up or down but the hand is in a different position. It's valid enphasize that there's no middle term, it's just up or down, 1 or 0. I could use the [bucketized_column](https://www.tensorflow.org/api_docs/python/tf/feature_column/bucketized_column) method of TensorFlow and make each seal be a random selection of 0s and 1s in a list but I want to make my dataset by hand and know wich image is wich list. Anyways. Because of the limitations I select 10 [specifics seals](Dataset/img/) and made a [cvs file](Dataset/data_set.csv).
   
-  Because my dataset is too small, hte ML will overfit anyways. So I want to make a CSV file with a lot of the same data randomly positioned and test different bach sizes and different layers configurations and plot everything to compare. For that, I made a [script](Dataset/generate_dataset.py) that randomly pics a item from a list and put on a CSV file a thousand times (literaly). I had to use ';' instead of ',' because the csv indentified comma as the iterable to each column and didn't alowed to write a full list and iterated it as an string. 
+  Because my dataset is too small, hte ML will overfit anyways. So I want to make a CSV file with a lot of the same data randomly positioned and test different bach sizes and different layers configurations and plot everything to compare. For that, I made a [script](Dataset/generate_dataset.py) that randomly pics a item from a list and put on a CSV file a thousand times (literaly). 
   
   Now it's time for some training.
   
